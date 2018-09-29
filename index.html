@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Stock Search Application</title>
-    
-    <link type = "text/css" rel="stylesheet" href="./assets/style/css.style.css">
-    
+
+    <link type="text/css" rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
 </head>
+
 <body>
-    
+    <div class="container-fluid">
+        <div class="row title-bar">
+            <div class="col-2 d-lg-none">
+                <i class="fas fa-bars fa-2x" id="open-menu"></i>
+            </div>
+            <div class="title col-8 col-lg-12">
+                <h1>TITLE</h1>
+            </div>
+            <div class="col-2 d-lg-none">
+                <i class="fas fa-star fa-2x"></i>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="side-menu">
+            <ul class="list-group list-group-flush">
+                <div class="row">
+                    <div class="col-10"></div>
+                    <a href="#" class=" col-2 list-group-item"><i class="fas fa-times fa-2x" id="close-menu"></i></a>
+                </div>
+                <div class="row">
+                    <a href='#' class=" col-12 list-group-item active">IEX</a>
+                </div>
+                <div class="row">
+                    <a href='#' class=" col-12 list-group-item">AlphaVantage</a>
+                </div>
+                <div class="row">
+                    <a href='#' class=" col-12 list-group-item">Financial Content</a>
+                </div>
+            </ul>
+        </div>
+        </div>   
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
