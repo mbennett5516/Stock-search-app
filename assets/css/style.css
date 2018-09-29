@@ -16,28 +16,39 @@
 }
 
 #close-menu{
-    font-size: 1em;
+    font-size: 2em;
     position: relative;
     right: 10px;
 }
 
-#side-menu{
+#side-menu, #favs-menu{
     background-color: #303030;
     color: #818385;
     z-index: 1;
     height: 100%;
     position: fixed;
     top: 0;
-    left: 0;
     width: 0;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    overflow-x: hidden;
+    transition: 0.5s;
     white-space: nowrap;
+}
+
+#side-menu{
+    left: 0;
+}
+
+#favs-menu{
+    right: 0;
 }
 
 .list-group-item{
     color: #818385;
     background-color: #303030;
+}
+
+.list-group-item:hover{
+    color: white;   
 }
 
 .list-group-item.active{
@@ -46,7 +57,7 @@
     border-color: rgba(0,0,0,.125);
 }
 
-#side-menu ul div a{
+#side-menu ul div a, #favs-menu ul div a{
     text-align: center;
     font-size: 2.5em;
     line-height: 2em;
