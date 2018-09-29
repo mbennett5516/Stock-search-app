@@ -13,6 +13,7 @@
     <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
 </head>
 
 <body>
@@ -69,7 +70,7 @@
     </div>
     <div class="menu-bar container-fluid">
         <div class="row">
-            <div class="d-none d-lg-inline-block col-lg-4">
+            <div class="d-none d-lg-inline-block col-lg-3">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -82,16 +83,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Stock Symbol" aria-label="Stock Symbol"
-                        aria-describedby="button-addon2" id="symbol-input">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="submit">Submit</button>
+            <div class="col-12 col-lg-6">
+                <form class="form-inline">
+                    <div class="input-group" id="input-group">
+                        <input autofocus type="text" class="form-control" placeholder="Stock Symbol" aria-label="Stock Symbol"
+                            aria-describedby="button-addon2" id="symbol-input">
+                        <span class="input-group-append">
+                            <input type="submit" class="btn btn-outline-secondary d-inline-block" type="button" id="submit" />
+                            <button class="btn btn-outline-secondary" type="button" id="clear">Clear</button>
+                        </span>
                     </div>
-                </div>
+                </form>
             </div>
-            <div class="d-none d-lg-inline-block col-lg-4">
+            <div class="d-none d-lg-inline-block col-lg-3">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -110,7 +114,7 @@
         <div class="row">
             <div class="col-12 col-md-8 col-lg-6 info-main">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12 col-sm-8">
                         <div class="row">
                             <div class="col-12" id="name"></div>
                         </div>
@@ -118,7 +122,7 @@
                             <div class="col-12" id="ceo"></div>
                         </div>
                         <div class="row">
-                            <div class="col-9" id="price"></div>
+                            <div class="col-6" id="price"></div>
                             <div class="col-3">
                                 <div class="row">
                                     <div class="col-12" id="chg"></div>
@@ -133,12 +137,15 @@
                             <div class="col-6" id="low"></div>
                         </div>
                     </div>
-                    <div class="col-3" id="logo"></div>
+                    <div class="col-12 col-sm-4" id="logo"></div>
                 </div>
             </div>
-            <div class="d-none d-md-inline-block col-md-4 col-lg-6 graph"></div>
+            <div class="d-none d-md-inline-block col-md-4 col-lg-6 graph">
+                <img id="chart" src="assets/images/chart.jpeg" />
+            </div>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>

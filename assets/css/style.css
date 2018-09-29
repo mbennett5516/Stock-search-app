@@ -1,3 +1,6 @@
+body{
+    font-family: 'PT Serif', serif;
+}
 .title-bar{
     background-color: #303030;
     color: #818385;
@@ -75,6 +78,34 @@
 
 .content{
     padding-top: 30px;
+}
+
+#chart{
+    width: 100%;
+}
+
+#input-group{
+    width: 100%;  
+}
+
+#name{
+    font-size: 1.5em;
+}
+
+#ceo{
+    font-size:.5em;
+    padding-bottom: 5px;
+}
+
+#price{
+    font-size: 2em;
+}
+
+#chg, #chgPer, #high, #low{
+    font-size: 1em;
+}
+#logo{
+    width: 100%;
 }
 
 @media (min-width: 568px){

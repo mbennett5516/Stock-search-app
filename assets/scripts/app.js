@@ -6,10 +6,11 @@ const chgPer = $('#chgPer');
 const high = $('#high');
 const low = $('#low');
 const logo = $('#logo');
+const input = $('#symbol-input')
 
-const getInfo = function(){
-
-    const stockSymbol = $('#symbol-input').val();
+const getInfo = function(event){
+    event.preventDefault();
+    const stockSymbol = input.val();
     const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=5`;
 
     $.ajax({
@@ -30,18 +31,37 @@ const emptyAll = function(){
     high.empty();
     low.empty();
     logo.empty();
+    input.val('')
 }
 
 const render = function(response){
     emptyAll();
+    let per = response.quote.changePercent;
+    per = per.toFixed(2);
+    if(per>=0){
+        chgPer.html(`(+${per}%)`);
+        chgPer.css('color', '#025928');
+    }
+    else{
+        chgPer.html(`(${per}%)`);
+        chgPer.css('color', 'red');
+    }
+    let change = response.quote.change
+    if(change>=0){
+        chg.html(`+${change}`);
+        chg.css('color', '#025928')
+    }
+    else{
+        chg.html(`${change}`);
+        chg.css('color', 'red');
+    }
     name.text(response.company.companyName)
-    ceo.text(response.company.CEO)
+    ceo.text(`CEO: ${response.company.CEO}`)
     price.text(response.quote.latestPrice);
-    chg.text(response.quote.change);
-    chgPer.text(response.quote.changePercent)
-    high.text(response.quote.high);
-    low.text(response.quote.low);
+    high.text(`HIGH: ${response.quote.high}`);
+    low.text(`LOW: ${response.quote.low}`);
     logo.html(`<img src="${response.logo.url}"/>`);
+    input.val('');
 }
 
 $('#close-menu').on('click', function(){
@@ -70,3 +90,4 @@ $('.menu-item').on('click', function(){
 })
 
 $('#submit').on('click', getInfo);
+$('#clear').on('click', emptyAll);
