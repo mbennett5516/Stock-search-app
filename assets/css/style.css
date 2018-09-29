@@ -108,10 +108,31 @@ body{
     width: 100%;
 }
 
+#graph{
+    position: relative;
+    width: 100%;
+}
+
 @media (min-width: 568px){
 
     .fa-star{
         position: relative;
         right: -50px;
+    }
+}
+
+@media (min-width: 768px){
+
+    #name{
+        font-size: 2em;
+    }
+
+    #price{
+        font-size: 3em;
+    }
+    
+    #chg, #chgPer, #high, #low{
+        font-size: 1.5em;
+        white-space: nowrap;
     }
 }

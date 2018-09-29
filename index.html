@@ -122,8 +122,8 @@
                             <div class="col-12" id="ceo"></div>
                         </div>
                         <div class="row">
-                            <div class="col-6" id="price"></div>
-                            <div class="col-3">
+                            <div class="col-8" id="price"></div>
+                            <div class="col-4">
                                 <div class="row">
                                     <div class="col-12" id="chg"></div>
                                 </div>
@@ -140,15 +140,17 @@
                     <div class="col-12 col-sm-4" id="logo"></div>
                 </div>
             </div>
-            <div class="d-none d-md-inline-block col-md-4 col-lg-6 graph">
-                <img id="chart" src="assets/images/chart.jpeg" />
+            <div class="d-none d-md-inline-block col-md-4 col-lg-6" id="graph">
+                <canvas id="chart"></canvas>
             </div>
         </div>
+        <div class="images"></div>
     </div>
-
+    <script src="assets/scripts/Chart.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+
     <script src="assets/scripts/bootstrap.js"></script>
     <script src="assets/scripts/app.js"></script>
 </body>
