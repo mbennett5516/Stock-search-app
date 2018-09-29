@@ -63,6 +63,20 @@
     line-height: 2em;
 }
 
+.menu-bar{
+    padding-top:5px;
+    padding-bottom: 5px;
+    background-color: #303030;
+}
+
+.dropdown-toggle, .dropdown-menu{
+    width: 100%;
+}
+
+.content{
+    padding-top: 30px;
+}
+
 @media (min-width: 568px){
 
     .fa-star{

@@ -67,8 +67,83 @@
             </ul>
         </div>
     </div>
+    <div class="menu-bar container-fluid">
+        <div class="row">
+            <div class="d-none d-lg-inline-block col-lg-4">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Switch APIs
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">IEX</a>
+                        <a class="dropdown-item" href="#">AlphaVantage</a>
+                        <a class="dropdown-item" href="#">Financial Content</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Stock Symbol" aria-label="Stock Symbol"
+                        aria-describedby="button-addon2" id="symbol-input">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-lg-inline-block col-lg-4">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Favorites
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Favorite 1</a>
+                        <a class="dropdown-item" href="#">Favorite 2</a>
+                        <a class="dropdown-item" href="#">Favorite 3</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container content">
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-6 info-main">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12" id="name"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" id="ceo"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9" id="price"></div>
+                            <div class="col-3">
+                                <div class="row">
+                                    <div class="col-12" id="chg"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" id="chgPer"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6" id="high"></div>
+                            <div class="col-6" id="low"></div>
+                        </div>
+                    </div>
+                    <div class="col-3" id="logo"></div>
+                </div>
+            </div>
+            <div class="d-none d-md-inline-block col-md-4 col-lg-6 graph"></div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/scripts/bootstrap.js"></script>
     <script src="assets/scripts/app.js"></script>
 </body>
+
 </html>
