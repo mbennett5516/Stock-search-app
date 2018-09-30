@@ -6,7 +6,8 @@ const chgPer = $('#chgPer');
 const high = $('#high');
 const low = $('#low');
 const logo = $('#logo');
-const input = $('#symbol-input')
+const input = $('#symbol-input');
+const news = $('#news');
 let ctx = $('#chart');
 const favsDropdown = $('#favs-dropdown');
 const favsMenu = $('#favs-slider');
@@ -76,6 +77,7 @@ const getFavInfo = function (event) {
         name.text("Please enter a valid United States trading symbol.");
         name.css('color', 'red');
     }
+    $('#favs-menu').css("width", "0");
 }
 
 const emptyAll = function () {
@@ -89,6 +91,7 @@ const emptyAll = function () {
     logo.empty();
     input.val('');
     $('#graph-title').empty();
+    news.empty();
     resetCanvas();
 }
 
@@ -126,7 +129,7 @@ const renderGraph = function (arr, y) {
         },
         options: {
             responsive: true,
-            legend:{
+            legend: {
                 display: false,
             }
         }
@@ -164,8 +167,22 @@ const render = function (response) {
     logo.html(`<img src="${response.logo.url}"/>`);
     input.val('');
     getChartData(response.chart);
-    // console.log(chartData);
-    // ctx.html(renderChart);
+    getNews(response.news)
+}
+
+const getNews = function (data) {
+    for (let i = 0; i < data.length; i++) {
+        let block = `<div class="col-12 col-md-6 col-lg-3" id="block">
+        <div id="news-image">
+            <img src=${data[i].image}/>
+        </div>
+        <div id="news-headline">
+            ${data[i].headline}
+        </div>
+        </div>`;
+        news.append(block);
+        console.log(data[i].image);
+    }
 }
 
 $('#close-menu').on('click', function () {
@@ -195,4 +212,5 @@ $('.menu-item').on('click', function () {
 
 $('#submit').on('click', getInfo);
 $('#clear').on('click', emptyAll);
-$('#favs-dropdown').on('click','.favorite', getFavInfo);
+$('#favs-dropdown').on('click', '.favorite', getFavInfo);
+$('#favs-slider').on('click', '.favorite', getFavInfo);

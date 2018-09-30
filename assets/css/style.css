@@ -108,8 +108,17 @@ body{
 #chg, #chgPer, #high, #low{
     font-size: 1em;
 }
+
 #logo{
     width: 100%;
+}
+
+#news{
+    display: inline-block;
+}
+
+#block{
+    display: inline-block;
 }
 
 #graph{
