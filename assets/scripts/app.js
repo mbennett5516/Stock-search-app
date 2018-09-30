@@ -126,8 +126,13 @@ const renderGraph = function (arr, y) {
         },
         options: {
             responsive: true,
+            legend:{
+                display: false,
+            }
         }
     });
+    $('#graph-title').text(`Market Average`);
+    $('#graph-title').css('text-align', 'center');
 }
 
 const render = function (response) {
