@@ -8,8 +8,11 @@ const low = $('#low');
 const logo = $('#logo');
 const input = $('#symbol-input')
 const ctx = $('#chart');
+const favsDropdown = $('#favs-dropdown');
+const favsMenu = $('#favs-slider');
 let chartData = [];
-let stockList = [];
+let allStocks = [];
+const stockList = ['AAPL', 'GOOG', 'AMZN', 'TSLA', 'BRK.A'];
 
 $(document).ready(function () {
     $.ajax({
@@ -19,16 +22,45 @@ $(document).ready(function () {
 
         console.log(response);
         for (let i = 0; i < response.length; i++) {
-            stockList.push(response[i].symbol);
+            allStocks.push(response[i].symbol);
         }
-        console.log(stockList);
+        console.log(allStocks);
     })
+    for (let i = 0; i < stockList.length; i++) {
+        favsMenu.append(`<div class="row">
+            <a href='#' class="favorite col-12 list-group-item">${stockList[i]}</a>
+        </div>`);
+        favsDropdown.append(`<a class="favorite dropdown-item" href="#">${stockList[i]}</a>`);
+    }
 })
 
 const getInfo = function (event) {
     event.preventDefault();
     const stockSymbol = input.val().toUpperCase();
-    if (stockList.includes(stockSymbol)) {
+    if (allStocks.includes(stockSymbol)) {
+        const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
+
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).then(function (response) {
+            console.log(response);
+            render(response);
+        })
+    }
+    else {
+        emptyAll();
+        name.text("Please enter a valid United States trading symbol.");
+        name.css('color', 'red');
+    }
+}
+
+const getFavInfo = function (event) {
+    console.log("function is running");
+    event.preventDefault();
+    const stockSymbol = $(this).attr('data-name');
+    console.log(stockSymbol);
+    if (allStocks.includes(stockSymbol)) {
         const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
 
         $.ajax({
@@ -147,3 +179,4 @@ $('.menu-item').on('click', function () {
 
 $('#submit').on('click', getInfo);
 $('#clear').on('click', emptyAll);
+$('.favorite').on('click', getFavInfo);
