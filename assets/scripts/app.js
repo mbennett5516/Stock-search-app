@@ -9,23 +9,41 @@ const logo = $('#logo');
 const input = $('#symbol-input')
 const ctx = $('#chart');
 let chartData = [];
+let stockList = [];
 
-const verify = function(){
+$(document).ready(function () {
+    $.ajax({
+        url: `https://api.iextrading.com/1.0/ref-data/symbols`,
+        method: 'GET',
+    }).then(function (response) {
 
-}
+        console.log(response);
+        for (let i = 0; i < response.length; i++) {
+            stockList.push(response[i].symbol);
+        }
+        console.log(stockList);
+    })
+})
 
 const getInfo = function (event) {
     event.preventDefault();
-    const stockSymbol = input.val();
-    const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,symbols,chart&range=1d&last=10`;
+    const stockSymbol = input.val().toUpperCase();
+    if (stockList.includes(stockSymbol)) {
+        const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
 
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
-    }).then(function (response) {
-        console.log(response);
-        render(response);
-    })
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).then(function (response) {
+            console.log(response);
+            render(response);
+        })
+    }
+    else {
+        emptyAll();
+        name.text("Please enter a valid United States trading symbol.");
+        name.css('color', 'red');
+    }
 }
 
 const emptyAll = function () {
@@ -37,13 +55,15 @@ const emptyAll = function () {
     high.empty();
     low.empty();
     logo.empty();
-    input.val('')
+    input.val('');
+    // $('#graph').empty();
+    renderGraph();
 }
 
 const getChartData = function (response) {
     let arr = [];
     let y = []
-    response.forEach(function(data){
+    response.forEach(function (data) {
         arr.push(data.marketAverage);
         y.push(data.minute);
     })
@@ -51,20 +71,20 @@ const getChartData = function (response) {
     renderGraph(arr, y);
 }
 
-const renderGraph = function(arr, y){
+const renderGraph = function (arr, y) {
     var x = new Chart(ctx, {
         type: 'line',
         data: {
             labels: y,
             datasets: [{
-              data: arr, 
-              radius:0,           
+                data: arr,
+                radius: 0,
             }]
-          },
+        },
         options: {
-            responsive:true, 
+            responsive: true,
         }
-     });
+    });
 }
 
 const render = function (response) {
