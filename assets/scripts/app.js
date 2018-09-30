@@ -10,10 +10,14 @@ const input = $('#symbol-input')
 const ctx = $('#chart');
 let chartData = [];
 
+const verify = function(){
+
+}
+
 const getInfo = function (event) {
     event.preventDefault();
     const stockSymbol = input.val();
-    const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
+    const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,symbols,chart&range=1d&last=10`;
 
     $.ajax({
         url: queryURL,
@@ -37,23 +41,31 @@ const emptyAll = function () {
 }
 
 const getChartData = function (response) {
-    for (let i = 0; i < response.chart.length; i++) {
-        chartData.push({
-            x: response.chart[i].minute,
-            y: response.chart[i].marketAverage,
-        })
-    }
-    console.log(chartData);
-    let chart = new Chart(ctx, {
-        type: 'line',
-        label: '1 Day Price',
-        data: chartData,
-        options: {scales:{xAxes:[{ticks:{beginAtZero:false}}]},
-                scales:{yAxes:[{ticks:{beginAtZero:false}}]}},
+    let arr = [];
+    let y = []
+    response.forEach(function(data){
+        arr.push(data.marketAverage);
+        y.push(data.minute);
     })
+    console.log(arr);
+    renderGraph(arr, y);
 }
 
-
+const renderGraph = function(arr, y){
+    var x = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: y,
+            datasets: [{
+              data: arr, 
+              radius:0,           
+            }]
+          },
+        options: {
+            responsive:true, 
+        }
+     });
+}
 
 const render = function (response) {
     emptyAll();
@@ -83,7 +95,7 @@ const render = function (response) {
     low.text(`LOW: ${response.quote.low}`);
     logo.html(`<img src="${response.logo.url}"/>`);
     input.val('');
-    getChartData(response);
+    getChartData(response.chart);
     // console.log(chartData);
     // ctx.html(renderChart);
 }
