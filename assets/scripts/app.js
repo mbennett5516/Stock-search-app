@@ -7,7 +7,7 @@ const high = $('#high');
 const low = $('#low');
 const logo = $('#logo');
 const input = $('#symbol-input')
-const ctx = $('#chart');
+let ctx = $('#chart');
 const favsDropdown = $('#favs-dropdown');
 const favsMenu = $('#favs-slider');
 let chartData = [];
@@ -28,9 +28,9 @@ $(document).ready(function () {
     })
     for (let i = 0; i < stockList.length; i++) {
         favsMenu.append(`<div class="row">
-            <a class="favorite col-12 list-group-item" id="${stockList[i]}">${stockList[i]}</a>
+            <a class="favorite col-12 list-group-item" href="#" id="${stockList[i]}">${stockList[i]}</a>
         </div>`);
-        favsDropdown.append(`<a class="favorite dropdown-item" id="${stockList[i]}">${stockList[i]}</a>`);
+        favsDropdown.append(`<a class="favorite dropdown-item" href="#" id="${stockList[i]}">${stockList[i]}</a>`);
     }
 })
 
@@ -89,10 +89,20 @@ const emptyAll = function () {
     logo.empty();
     input.val('');
     // $('#graph').empty();
-    renderGraph();
+    resetCanvas();
+}
+
+const resetCanvas = function () {
+    $('#chart').remove(); // this is my <canvas> element
+    $('#graph').append('<canvas id="chart"></canvas>');
+    canvas = document.querySelector('#chart'); // why use jQuery?
+    ctx = canvas.getContext('2d');
+    ctx.canvas.width = $('#graph').width(); // resize to parent width
+    ctx.canvas.height = $('#graph').height();
 }
 
 const getChartData = function (response) {
+    resetCanvas();
     let arr = [];
     let y = []
     response.forEach(function (data) {
@@ -104,6 +114,7 @@ const getChartData = function (response) {
 }
 
 const renderGraph = function (arr, y) {
+
     var x = new Chart(ctx, {
         type: 'line',
         data: {
