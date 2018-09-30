@@ -88,7 +88,7 @@ const emptyAll = function () {
     low.empty();
     logo.empty();
     input.val('');
-    // $('#graph').empty();
+    $('#graph-title').empty();
     resetCanvas();
 }
 

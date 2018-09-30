@@ -76,6 +76,10 @@ body{
     width: 100%;
 }
 
+.dropdown-item{
+    text-align: center;
+}
+
 .content{
     padding-top: 30px;
 }
