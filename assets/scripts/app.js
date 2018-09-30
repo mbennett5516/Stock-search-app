@@ -28,9 +28,9 @@ $(document).ready(function () {
     })
     for (let i = 0; i < stockList.length; i++) {
         favsMenu.append(`<div class="row">
-            <a href='#' class="favorite col-12 list-group-item">${stockList[i]}</a>
+            <a class="favorite col-12 list-group-item" id="${stockList[i]}">${stockList[i]}</a>
         </div>`);
-        favsDropdown.append(`<a class="favorite dropdown-item" href="#">${stockList[i]}</a>`);
+        favsDropdown.append(`<a class="favorite dropdown-item" id="${stockList[i]}">${stockList[i]}</a>`);
     }
 })
 
@@ -58,7 +58,7 @@ const getInfo = function (event) {
 const getFavInfo = function (event) {
     console.log("function is running");
     event.preventDefault();
-    const stockSymbol = $(this).attr('data-name');
+    const stockSymbol = $(this).text();
     console.log(stockSymbol);
     if (allStocks.includes(stockSymbol)) {
         const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
@@ -179,4 +179,4 @@ $('.menu-item').on('click', function () {
 
 $('#submit').on('click', getInfo);
 $('#clear').on('click', emptyAll);
-$('.favorite').on('click', getFavInfo);
+$('#favs-dropdown').on('click','.favorite', getFavInfo);
