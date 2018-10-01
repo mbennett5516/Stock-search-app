@@ -39,6 +39,7 @@ const getInfo = function (event) {
     event.preventDefault();
     const stockSymbol = input.val().toUpperCase();
     if (allStocks.includes(stockSymbol)) {
+        if(!stockList.includes(stockSymbol))
         $('#btn-bar').append(`<button class="btn stock-btn" id="${stockSymbol}">${stockSymbol}`)
         const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
 
