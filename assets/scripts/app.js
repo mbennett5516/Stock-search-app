@@ -68,6 +68,7 @@ const getFavInfo = function (event) {
             url: queryURL,
             method: 'GET'
         }).then(function (response) {
+            name.css('color', 'black')
             console.log(response);
             render(response);
         })

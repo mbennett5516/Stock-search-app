@@ -8,6 +8,7 @@ body{
 
 .title{
     text-align:center;
+    color: white;
 }
 
 .fas{
@@ -128,6 +129,12 @@ body{
 
 #info-main{
     vertical-align: middle;
+}
+
+.btn-outline-secondary{
+    /* background-color: #025928; */
+    color: white;
+    border-color: white;
 }
 
 @media (min-width: 568px){
