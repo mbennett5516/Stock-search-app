@@ -114,21 +114,15 @@ body{
     width: 100%;
 }
 
-#news{
-    display: inline-block;
-}
-
 #block{
     display: inline-block;
+    border:1px solid black;
+    min-height: 100px;
 }
 
 #graph{
     position: relative;
     width: 100%;
-}
-
-#info-main{
-    vertical-align: middle;
 }
 
 .btn-outline-secondary{

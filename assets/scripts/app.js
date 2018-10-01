@@ -173,12 +173,12 @@ const render = function (response) {
 
 const getNews = function (data) {
     for (let i = 0; i < data.length; i++) {
-        let block = `<div class="col-12 col-md-6 col-lg-3" id="block">
-        <div id="news-image">
-            <img src=${data[i].image}/>
-        </div>
-        <div id="news-headline">
-            ${data[i].headline}
+        let block = `<div class="col-12 col-md-6 col-lg-3 align-top" id="block">`;
+        // <div id="news-image">
+        //     <img src=${data[i].image}/>
+        // </div>
+        block += `<div id="news-headline">
+            <a href="${data[i].url}" target="_blank">${data[i].headline}</a>
         </div>
         </div>`;
         news.append(block);
