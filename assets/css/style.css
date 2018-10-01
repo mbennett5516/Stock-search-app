@@ -126,6 +126,10 @@ body{
     width: 100%;
 }
 
+#info-main{
+    vertical-align: middle;
+}
+
 @media (min-width: 568px){
 
     .fa-star{
