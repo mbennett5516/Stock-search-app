@@ -131,6 +131,16 @@ body{
     border-color: white;
 }
 
+#btn-bar{
+    background-color: #818385;
+}
+
+.stock-btn{
+    background-color: #025928;
+    color: white;
+    border-color: white;
+}
+
 @media (min-width: 568px){
 
     .fa-star{

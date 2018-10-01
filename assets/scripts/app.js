@@ -39,6 +39,7 @@ const getInfo = function (event) {
     event.preventDefault();
     const stockSymbol = input.val().toUpperCase();
     if (allStocks.includes(stockSymbol)) {
+        $('#btn-bar').append(`<button class="btn stock-btn" id="${stockSymbol}">${stockSymbol}`)
         const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
 
         $.ajax({
@@ -160,8 +161,14 @@ const render = function (response) {
         chg.html(`${change}`);
         chg.css('color', 'red');
     }
-    name.text(response.company.companyName)
-    ceo.text(`CEO: ${response.company.CEO}`)
+    let CEO = response.company.CEO;
+    if(CEO){
+        ceo.text(`CEO: ${response.company.CEO}`);
+    }
+    else{
+        ceo.text(`CEO data not found`);
+    }
+    name.text(response.company.companyName);
     price.text(response.quote.latestPrice);
     high.text(`HIGH: ${response.quote.high}`);
     low.text(`LOW: ${response.quote.low}`);
@@ -215,3 +222,4 @@ $('#submit').on('click', getInfo);
 $('#clear').on('click', emptyAll);
 $('#favs-dropdown').on('click', '.favorite', getFavInfo);
 $('#favs-slider').on('click', '.favorite', getFavInfo);
+$('#btn-bar').on('click', '.stock-btn', getFavInfo);
