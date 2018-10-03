@@ -12,3 +12,11 @@ Any stocks you enter into the search field that are not on the favorites list wi
 **Favorites**
 
 Next to the company name of any stock you search will be a star symbol. It will be a black outline if it is NOT a favorite, and the star will be solid gold if it is. If you click on/touch this star it will either assign this stock as a favorite semi-permenantly, or remove it from the favorites list semi-permenantly. If you would like to reset the favorites list completely, simply press/click on the 'Reset' button. The page will refresh with the original favorites in the dropdown/slide menu.
+
+**Portfolio**
+
+This project is linked on my professional portfolio. You can find it at https://mbennett5516.github.io/Stock-search-app
+
+**Contributers**
+
+I am the sole contributer on this project and I will be adding functionality to the API menu later on, adding additional news and datafrom those sources
