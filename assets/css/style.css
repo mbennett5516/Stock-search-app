@@ -11,14 +11,9 @@ body{
     color: white;
 }
 
-.fas{
+.fas, .far{
     margin-top: 10px;
 }
-
-.fa-star{
-    color: gold;
-}
-
 
 .list-group-item{
     color: #818385;
@@ -61,9 +56,24 @@ body{
 }
 
 .btn-outline-secondary{
-    /* background-color: #025928; */
     color: white;
     border-color: white;
+}
+
+#favs-off{
+    color: gold;
+}
+
+#favs-on{
+    color: black;
+}
+
+#favs-on:hover{
+    color:gold;
+}
+
+#open-favs{
+    color: gold;
 }
 
 #close-menu{
@@ -145,7 +155,7 @@ body{
 
 @media (min-width: 568px){
 
-    .fa-star{
+    #open-favs{
         position: relative;
         right: -50px;
     }

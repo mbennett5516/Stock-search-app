@@ -14,19 +14,25 @@ const favsMenu = $('#favs-slider');
 let chartData = [];
 let allStocks = [];
 let userStocks = [];
-const stockList = ['AAPL', 'GOOG', 'AMZN', 'TSLA', 'BRK.A'];
+let stockList;
+let lastSelection = {};
 
 $(document).ready(function () {
+    stockList = JSON.parse(localStorage.getItem("stockList"));
+    if (!stockList){
+        stockList = ['AAPL', 'GOOG', 'AMZN', 'TSLA', 'BRK.A'];
+    }
+    // console.log(userStocks);
     $.ajax({
         url: `https://api.iextrading.com/1.0/ref-data/symbols`,
         method: 'GET',
     }).then(function (response) {
 
-        console.log(response);
+        // console.log(response);
         for (let i = 0; i < response.length; i++) {
             allStocks.push(response[i].symbol);
         }
-        console.log(allStocks);
+        // console.log(allStocks);
     })
     for (let i = 0; i < stockList.length; i++) {
         favsMenu.append(`<div class="row">
@@ -40,10 +46,17 @@ const getInfo = function (event) {
     event.preventDefault();
     const stockSymbol = input.val().trim().toUpperCase();
     if (allStocks.includes(stockSymbol)) {
-        if(!stockList.includes(stockSymbol)){
-            if(!userStocks.includes(stockSymbol)){
-                $('#btn-bar').append(`<button class="btn stock-btn" id="${stockSymbol}">${stockSymbol}`);
+        if (!stockList.includes(stockSymbol)) {
+            if (!userStocks) {
+                userStocks = [];
+                $('#btn-bar').append(`<button class="btn stock-btn" id="${stockSymbol}">${stockSymbol}</button>`);
                 userStocks.push(stockSymbol);
+                localStorage.setItem("userStocks", JSON.stringify(userStocks));
+            }
+            else if (!userStocks.includes(stockSymbol)) {
+                $('#btn-bar').append(`<button class="btn stock-btn" id="${stockSymbol}">${stockSymbol}</button>`);
+                userStocks.push(stockSymbol);
+                localStorage.setItem("userStocks", JSON.stringify(userStocks));
             }
 
         }
@@ -53,7 +66,7 @@ const getInfo = function (event) {
             url: queryURL,
             method: 'GET'
         }).then(function (response) {
-            console.log(response);
+            // console.log(response);
             render(response);
         })
         name.css('color', 'black');
@@ -66,10 +79,10 @@ const getInfo = function (event) {
 }
 
 const getFavInfo = function (event) {
-    console.log("function is running");
+    // console.log("function is running");
     event.preventDefault();
     const stockSymbol = $(this).text();
-    console.log(stockSymbol);
+    // console.log(stockSymbol);
     if (allStocks.includes(stockSymbol)) {
         const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
 
@@ -78,7 +91,7 @@ const getFavInfo = function (event) {
             method: 'GET'
         }).then(function (response) {
             name.css('color', 'black')
-            console.log(response);
+            // console.log(response);
             render(response);
         })
     }
@@ -122,7 +135,7 @@ const getChartData = function (response) {
         arr.push(data.marketAverage);
         y.push(data.minute);
     })
-    console.log(arr);
+    // console.log(arr);
     renderGraph(arr, y);
 }
 
@@ -150,6 +163,8 @@ const renderGraph = function (arr, y) {
 
 const render = function (response) {
     emptyAll();
+    favsDropdown.empty();
+    favsMenu.empty();
     let per = response.quote.changePercent;
     per = per.toFixed(2);
     if (response.quote.changePercent >= 0) {
@@ -170,13 +185,18 @@ const render = function (response) {
         chg.css('color', 'red');
     }
     let CEO = response.company.CEO;
-    if(CEO){
+    if (CEO) {
         ceo.text(`CEO: ${response.company.CEO}`);
     }
-    else{
+    else {
         ceo.text(`CEO data not found`);
     }
-    name.text(response.company.companyName);
+    if(stockList.includes(response.company.symbol)){
+        name.html(`<i class="fas fa-star" id="favs-off"></i>${response.company.companyName}`);
+    }
+    else{
+        name.html(`<i class="far fa-star" id="favs-on"></i>${response.company.companyName}`);
+    }
     price.text(response.quote.latestPrice);
     high.text(`HIGH: ${response.quote.high}`);
     low.text(`LOW: ${response.quote.low}`);
@@ -184,6 +204,14 @@ const render = function (response) {
     input.val('');
     getChartData(response.chart);
     getNews(response.news)
+    favsMenu.html(`<i class="col-auto list-group-item fas fa-times fa-2x" id="close-favs"></i>`)
+    for (let i = 0; i < stockList.length; i++) {
+        favsMenu.append(`<div class="row">
+            <a class="favorite col-12 list-group-item" href="#" id="${stockList[i]}">${stockList[i]}</a>
+        </div>`);
+        favsDropdown.append(`<a class="favorite dropdown-item" href="#" id="${stockList[i]}">${stockList[i]}</a>`);
+    }
+    lastSelection = response;
 }
 
 const getNews = function (data) {
@@ -197,8 +225,33 @@ const getNews = function (data) {
         </div>
         </div>`;
         news.append(block);
-        console.log(data[i].image);
+        // console.log(data[i].image);
     }
+}
+
+const toggleFavs = function () {
+    // console.log('function is running');
+    if (stockList.includes(lastSelection.company.symbol)) {
+        let i = stockList.indexOf(lastSelection.company.symbol);
+        // console.log(stockList[i]);
+        // console.log(lastSelection.company.symbol);
+        stockList.splice(i, 1);
+        render(lastSelection);
+        name.html(`<i class="far fa-star" id="favs-on"></i>${lastSelection.company.companyName}`);
+    }
+    else{
+        stockList.push(lastSelection.company.symbol);
+        render(lastSelection);
+        name.html(`<i class="fas fa-star gold-star" id="favs-off"></i>${lastSelection.company.companyName}`);
+    }
+    localStorage.setItem("stockList", JSON.stringify(stockList));
+}
+
+const resetLS = function(){
+    localStorage.clear();
+    emptyAll();
+    name.text("Local storage cleared");
+    location.reload()
 }
 
 $('#close-menu').on('click', function () {
@@ -211,7 +264,7 @@ $('#open-menu').on('click', function () {
     menu.css("width", "100%");
 });
 
-$('#close-favs').on('click', function () {
+favsMenu.on('click', '#close-favs', function () {
     const favs = $('#favs-menu');
     favs.css("width", "0");
 })
@@ -231,3 +284,6 @@ $('#clear').on('click', emptyAll);
 $('#favs-dropdown').on('click', '.favorite', getFavInfo);
 $('#favs-slider').on('click', '.favorite', getFavInfo);
 $('#btn-bar').on('click', '.stock-btn', getFavInfo);
+name.on('click', '#favs-on', toggleFavs);
+name.on('click', '#favs-off', toggleFavs);
+$('#reset').on('click', resetLS)
