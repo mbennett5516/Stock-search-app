@@ -19,6 +19,53 @@ body{
     color: gold;
 }
 
+
+.list-group-item{
+    color: #818385;
+    background-color: #303030;
+}
+
+.list-group-item:hover{
+    color: white;   
+}
+
+.list-group-item.active{
+    color:white;
+    background-color: #818385;
+    border-color: rgba(0,0,0,.125);
+}
+
+.menu-bar{
+    padding-top:5px;
+    padding-bottom: 5px;
+    background-color: #303030;
+}
+
+.dropdown-toggle, .dropdown-menu{
+    width: 100%;
+}
+
+.dropdown-item{
+    text-align: center;
+}
+
+.content{
+    padding-top: 30px;
+}
+
+.stock-btn{
+    background-color: #025928;
+    color: white;
+    border-color: white;
+    margin: 5px;
+}
+
+.btn-outline-secondary{
+    /* background-color: #025928; */
+    color: white;
+    border-color: white;
+}
+
 #close-menu{
     font-size: 2em;
     position: relative;
@@ -46,43 +93,10 @@ body{
     right: 0;
 }
 
-.list-group-item{
-    color: #818385;
-    background-color: #303030;
-}
-
-.list-group-item:hover{
-    color: white;   
-}
-
-.list-group-item.active{
-    color:white;
-    background-color: #818385;
-    border-color: rgba(0,0,0,.125);
-}
-
 #side-menu ul div a, #favs-menu ul div a{
     text-align: center;
     font-size: 2.5em;
     line-height: 2em;
-}
-
-.menu-bar{
-    padding-top:5px;
-    padding-bottom: 5px;
-    background-color: #303030;
-}
-
-.dropdown-toggle, .dropdown-menu{
-    width: 100%;
-}
-
-.dropdown-item{
-    text-align: center;
-}
-
-.content{
-    padding-top: 30px;
 }
 
 #chart{
@@ -125,20 +139,8 @@ body{
     width: 100%;
 }
 
-.btn-outline-secondary{
-    /* background-color: #025928; */
-    color: white;
-    border-color: white;
-}
-
 #btn-bar{
     background-color: #818385;
-}
-
-.stock-btn{
-    background-color: #025928;
-    color: white;
-    border-color: white;
 }
 
 @media (min-width: 568px){

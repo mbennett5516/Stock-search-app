@@ -13,6 +13,7 @@ const favsDropdown = $('#favs-dropdown');
 const favsMenu = $('#favs-slider');
 let chartData = [];
 let allStocks = [];
+let userStocks = [];
 const stockList = ['AAPL', 'GOOG', 'AMZN', 'TSLA', 'BRK.A'];
 
 $(document).ready(function () {
@@ -37,10 +38,15 @@ $(document).ready(function () {
 
 const getInfo = function (event) {
     event.preventDefault();
-    const stockSymbol = input.val().toUpperCase();
+    const stockSymbol = input.val().trim().toUpperCase();
     if (allStocks.includes(stockSymbol)) {
-        if(!stockList.includes(stockSymbol))
-        $('#btn-bar').append(`<button class="btn stock-btn" id="${stockSymbol}">${stockSymbol}`)
+        if(!stockList.includes(stockSymbol)){
+            if(!userStocks.includes(stockSymbol)){
+                $('#btn-bar').append(`<button class="btn stock-btn" id="${stockSymbol}">${stockSymbol}`);
+                userStocks.push(stockSymbol);
+            }
+
+        }
         const queryURL = `https://api.iextrading.com/1.0/stock/${stockSymbol}/batch?types=quote,logo,news,company,chart&range=1d&last=10`;
 
         $.ajax({
@@ -50,6 +56,7 @@ const getInfo = function (event) {
             console.log(response);
             render(response);
         })
+        name.css('color', 'black');
     }
     else {
         emptyAll();
@@ -137,7 +144,7 @@ const renderGraph = function (arr, y) {
             }
         }
     });
-    $('#graph-title').text(`Market Average`);
+    $('#graph-title').html(`<button class="btn btn-secondary" id="`);
     $('#graph-title').css('text-align', 'center');
 }
 
